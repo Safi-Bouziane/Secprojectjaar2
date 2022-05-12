@@ -1,0 +1,10 @@
+FROM python:3.8.12
+COPY requirements.txt etc/requirements.txt
+RUN mkdir /app
+COPY ./main.py /app
+COPY ./mysqlInsert.py /app
+RUN pip install -r etc/requirements.txt
+RUN pip install python-multipart
+RUN cd /app
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+

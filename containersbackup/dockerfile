@@ -1,0 +1,12 @@
+FROM python:latest
+
+#vr httphttps te builden
+RUN pip3 install requests
+
+#vr geoip te builden
+#RUN pip3 install maxminddb 
+#RUN pip3 install maxminddb-geolite2
+
+COPY testhttpredirect.py ./
+#verander hier voor andere testen om zo een docker image te maken vr die test
+#CMD ["python3", "./geoip.py"]
