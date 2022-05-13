@@ -1,0 +1,3 @@
+from python:latest
+run pip3 install mysql-connector-python
+COPY dnssec_check.py ./

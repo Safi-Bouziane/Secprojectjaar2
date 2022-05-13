@@ -1,6 +1,6 @@
 import socket
 # create an INET, STREAMing socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-site = "http://www.facebook.be"
+site = "www.facebook.com"
 
-socket.gethostbyname(site), 80
+print (socket.gethostbyname(site), 80)

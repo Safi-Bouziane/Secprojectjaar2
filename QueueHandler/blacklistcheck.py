@@ -4,6 +4,7 @@ import sys
 import urllib3
 import argparse
 import re
+import mysql.connector
 import socket
 import dns
 import warnings
@@ -173,7 +174,10 @@ def blacklist(Url):
             website = website[8:]
         else:
             website = website
-        ip = socket.gethostbyname(website)
+        try:
+          ip = socket.gethostbyname(website)
+        except:
+            return 'check failed'
         badip = ip
         if badip is None or badip == "":
             sys.exit("No IP address to check.")
@@ -214,4 +218,19 @@ def blacklist(Url):
         except dns.resolver.NoAnswer:
             blink('WARNING: No answer for ' + bl)
 
-    return str(red('{0} is on {1}/{2} blacklists.'.format(badip, BAD, (GOOD+BAD))))
+    return str('{0} is on {1}/{2} blacklists.'.format(badip, BAD, (GOOD+BAD)))
+
+result = blacklist(sys.argv[1])
+rowid = sys.argv[2]
+
+if 1:
+        mydb = mysql.connector.connect(
+        host="securityprojecthowsami.mysql.database.azure.com",
+        user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+        password="Honden120",
+        database="securityproject")
+        mycursor = mydb.cursor()
+        sql = f"UPDATE Result SET TEST3 = %s WHERE ID = %s"
+        val = (result,rowid)
+        mycursor.execute(sql, val)
+        mydb.commit()
