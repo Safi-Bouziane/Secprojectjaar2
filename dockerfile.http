@@ -1,0 +1,16 @@
+FROM python:latest
+#voor queuecontainer
+#COPY requirements.txt etc/requirements.txt
+#COPY queueHandler.py ./
+#RUN pip install -r etc/requirements.txt
+#RUN pip install python-multipart
+
+#voor httphttps te builden
+RUN pip3 install requests
+#voor met mysql resulthandeler
+run pip3 install mysql-connector-python
+
+# COPY shodancheck.py ./
+COPY testhttpredirect.py ./
+# COPY queueHandler.py ./
+# #verander hier voor andere testen om zo een docker image te maken vr die test

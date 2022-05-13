@@ -1,0 +1,30 @@
+import socket
+import ssl
+import sys
+import certifi
+import mysql.connector
+
+def ssl_check(url):
+    context=ssl.create_default_context(cafile=certifi.where())
+    if url.startswith(('http://')):
+        hostname = url[7:]
+    elif url.startswith(('https://')):
+        hostname = url[8:]
+    else:
+        hostname = url
+    with socket.create_connection((hostname, 443)) as sock:
+        with context.wrap_socket(sock, server_hostname=hostname) as ssock:
+            return ssock.version()
+result = ssl_check(sys.argv[1])
+rowid = sys.argv[2]
+if 1:
+        mydb = mysql.connector.connect(
+        host="securityprojecthowsami.mysql.database.azure.com",
+        user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+        password="Honden120",
+        database="securityproject")
+        mycursor = mydb.cursor()
+        sql = f"UPDATE Result SET TEST4 = %s WHERE ID = %s"
+        val = (result,rowid)
+        mycursor.execute(sql, val)
+        mydb.commit()
