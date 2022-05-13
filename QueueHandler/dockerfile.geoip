@@ -1,0 +1,9 @@
+from python:latest
+#vr geoip te builden
+
+RUN pip3 install maxminddb 
+RUN pip3 install maxminddb-geolite2
+
+run pip3 install mysql-connector-python
+
+COPY geoip.py ./

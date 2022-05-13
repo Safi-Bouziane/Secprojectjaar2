@@ -1,0 +1,4 @@
+from python:latest
+run pip3 install mysql-connector-python
+run pip3 install certifi
+COPY sslcheck.py ./
