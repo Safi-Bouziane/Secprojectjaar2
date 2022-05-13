@@ -1,0 +1,65 @@
+- hosts: mac
+  user: root
+  tasks:
+  - name: ensure repository key is installed
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+  - name: ensure docker registry is available
+    apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
+  - name: ensure docker and dependencies are installed
+    apt: name=docker-ce update_cache=yes
+  - name: install python3
+    apt: name=python3 state=present
+  - name: install python3-pip
+    apt: name=python3-pip state=present
+  - name: install ufw
+    apt: name=ufw state=present
+  - name: Copy file with owner and permissions
+    ansible.builtin.copy:
+      src: /projectv2
+      dest: /projectv2
+      owner: master
+      group: master
+      mode: '0777'
+  - name: change directory to /projectv2/MainApi
+    shell: cd /projectv2/MainApi/
+  - name: install requirements
+    shell: pip3 install -r requirements.txt
+  - name: run uvicorn
+    shell: uvicorn main:app --host 0.0.0.0 --port 8000 
+  - ufw:
+     state: enabled
+     policy: deny
+  - ufw:
+     logging: on
+  - ufw:
+     rule: allow
+     port: 8000
+     proto: tcp
+  - ufw:
+     rule: allow
+     port: 22
+     proto: tcp
+  - name: Setup alternate SSH port
+    lineinfile:
+     dest: "/etc/ssh/sshd_config"
+     regexp: "^Port"
+     line: "Port 2222"
+    notify: "Restart sshd"
+  - name: Setup selinux for alternate SSH port
+    seport:
+      ports: "2222"
+      proto: "tcp"
+      setype: "ssh_port_t"
+      state: "present"
+  - name: Restart sshd
+    service:
+      name: sshd
+      state: restarted
+  - name: add slave user
+    user: 
+      name: slave
+      password: slave
+      groups: sudo
+      state: present
