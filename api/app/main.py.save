@@ -1,0 +1,47 @@
+from fastapi import FastAPI, backgroundtasksfrom fastapi import BackgroundTasks, FastAPI
+
+app = FastAPI()
+
+def trigger_query_wrapper(database, entity_name):
+    value = details.get_query_status(database, entity_name)
+    # add logic for doing something with the value
+
+
+@app.get("/trigger_query")
+async def trigger_query(database:str, entity_name,  background_tasks: BackgroundTasks, token: str = Depends(oath2_scheme)):
+    background_tasks.add_task(trigger_query_wrapper,database, entity_name)
+    return {"message": "Task triggered in the background"}
+from pydantic import BaseModel
+from mysqlInsert import *
+
+class Resultaat(BaseModel):
+    ip: str
+    test1: bool
+    test2: bool
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+@app.post("/add/", status_code = 200)
+async def get_result(item: Resultaat):
+    InsertIntoQueue(item.ip,item.test1,item.test2)
+    return "ok"
+
+def trigger_query_wrapper(database, entity_name):
+    value = details.get_query_status(database, entity_name)
+    # add logic for doing something with the value
+
+
+@app.get("/trigger_query")
+async def trigger_query(database:str, entity_name,  background_tasks: BackgroundTasks, token: str = Depends(oath2_scheme)):
+    background_tasks.add_task(trigger_query_wrapper,database, entity_name)
+    return {"message": "Task triggered in the background"}
+
+
+
+
+
+
