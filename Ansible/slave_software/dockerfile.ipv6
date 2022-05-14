@@ -1,0 +1,5 @@
+FROM python:latest
+#vr dnsipv6
+RUN pip3 install dnspython
+run pip3 install mysql-connector-python
+COPY dnsipv6_check.py ./
