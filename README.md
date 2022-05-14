@@ -7,6 +7,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 ## Voor de queue op te starten, start het master.py scriptje op.
 
 ## Voor het downloade van alle images nodig voor de test containers te builden en maken run deze commando's
+
+### login op docker
 ```
 docker login
 ```
