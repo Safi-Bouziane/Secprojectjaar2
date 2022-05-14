@@ -72,7 +72,7 @@
     shell: docker image pull --all-tags argusproof/argusproof_deltateam
 
   - name: run uvicorn
-    shell: cd /home/slave/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000
+    shell: cd /home/slave/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
 
 
     
