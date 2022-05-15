@@ -4,12 +4,11 @@ from fastapi.staticfiles import StaticFiles
 from subprocess import Popen
 
 import mysql.connector
-
 mydb = mysql.connector.connect(
- host="securityprojecthowsami.mysql.database.azure.com",
- user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
- password="Honden120",
- database="securityproject"
+  host="securityprojecthowsami.mysql.database.azure.com",
+  user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+  password="Honden120",
+  database="securityproject"
 )
 def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
     mycursor = mydb.cursor()
