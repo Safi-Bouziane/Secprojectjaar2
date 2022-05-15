@@ -72,7 +72,7 @@
     shell: docker volume create portainer_data
 
   - name: run uvicorn
-    shell: cd /home/slave/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
+    shell: cd /home/slave/slave_software && nohup uvicorn mainapi:app --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
   - name: post ip to master
     shell: 
 

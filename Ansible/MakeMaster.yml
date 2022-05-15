@@ -78,11 +78,11 @@
     poll: 0
   
   - name: run uvicorn on the resulthandler api
-    shell: cd /home/master/master_software/ResultHandler/ && uvicorn ResultHandler:app --no-access-log --host 0.0.0.0 --port 8001 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
+    shell: cd /home/master/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --no-access-log --host 0.0.0.0 --port 8001 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
     async: 45
     poll: 0
   - name: run uvicorn on the main api
-    shell: cd /home/master/master_software/api/app/ && uvicorn main:app --reload --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
+    shell: cd /home/master/master_software/api/app/ && nohup uvicorn main:app --reload --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
     async: 45
     poll: 0
 
