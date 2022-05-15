@@ -1,4 +1,4 @@
-- hosts: mac
+- hosts: slave1,slave2
   user: root
   tasks:
   - name: ensure repository key is installed
@@ -59,11 +59,11 @@
       groups: sudo
       state: present
 
-  - name: Log into DockerHub using a custom config file
+
+  - name: Log into DockerHub
     docker_login:
       username: argusproof
       password: DeltaTeam
-      config_path: /tmp/.mydockercfg
 
   - name: Pull the latest images from private repository on DockerHub
     shell: docker image pull --all-tags argusproof/argusproof_deltateam

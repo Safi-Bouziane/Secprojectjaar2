@@ -81,7 +81,11 @@ while 1:
                     mydb.commit()
                     startcontainers(item,id[0]+1)
                 else:
-                    slave1cpu = requests.get('https://10.211.55.12:8000/cpuload', verify = False)
-                    rp = requests.post('https://10.211.55.12:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
+                    slave1cpu = requests.get('https://192.168.1.10:8000/cpuload', verify = False)
+                    slave2cpu = requests.get('https://192.168.1.174:8000/cpuload', verify = False)
+                    if slave1cpu > slave2cpu:
+                        test = requests.post('https://192.168.1.174:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
+                    else:
+                        test = requests.post('https://192.168.1.10:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
         wait = checkdb()
     
