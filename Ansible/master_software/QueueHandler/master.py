@@ -3,6 +3,7 @@ from tqdm import tqdm
 import time
 import psutil
 import mysql.connector
+import requests
 
 def convertTuple(tup):
         # initialize an empty string
@@ -17,22 +18,22 @@ def startcontainers(row,id):
     mycursor.execute(sql, val)
     mydb.commit()
     if  row[2]:
-        os.popen(f'sudo docker run -d test1 python3 testhttpredirect.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test1 python3 testhttpredirect.py {row[1]} {id}')
     if  row[3]:
-        os.popen(f'sudo docker run -d test2 python3 geoip.py {row[0]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test2 python3 geoip.py {row[0]} {id}')
     if  row[4]:
-        os.popen(f'sudo docker run -d test3 python3 blacklistcheck.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test3 python3 blacklistcheck.py {row[1]} {id}')
     if  row[5]:
-        os.popen(f'sudo docker run -d test4 python3 sslcheck.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test4 python3 sslcheck.py {row[1]} {id}')
     if  row[6]:
-        os.popen(f'sudo docker run -d test5 python3 dnssec_check.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test5 python3 dnssec_check.py {row[1]} {id}')
     if  row[7]:
-        os.popen(f'sudo docker run -d test6 python3 dnsipv6_check.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test6 python3 dnsipv6_check.py {row[1]} {id}')
 def checkdb():
     mydb = mysql.connector.connect(
         host="securityprojecthowsami.mysql.database.azure.com",
         user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
-        password="Honden120",
+        password="DeltaGroepPassword#",
         database="securityproject"
 )
     mycursor = mydb.cursor()
@@ -56,7 +57,7 @@ while 1:
             mydb = mysql.connector.connect(
             host="securityprojecthowsami.mysql.database.azure.com",
             user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
-            password="Honden120",
+            password="DeltaGroepPassword#",
             database="securityproject")
             mycursor = mydb.cursor()
             sql = "SELECT * FROM queue;"
@@ -74,12 +75,13 @@ while 1:
                   id[0] = 0
                 cpubar.n = psutil.cpu_percent()
                 rambar.n = psutil.virtual_memory().percent
-                if cpubar.n < 75 and rambar.n < 85:
+                if cpubar.n < 20 and rambar.n < 20:
                     sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                     mycursor.execute(sql)
                     mydb.commit()
                     startcontainers(item,id[0]+1)
                 else:
-                    time.sleep(3)
+                    slave1cpu = requests.get('https://10.211.55.12:8000/cpuload', verify = False)
+                    rp = requests.post('https://10.211.55.12:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
         wait = checkdb()
     

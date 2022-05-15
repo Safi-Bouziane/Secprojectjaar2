@@ -1,0 +1,90 @@
+- hosts: macmaster
+  user: root
+  tasks:
+  - name: ensure repository key is installed
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: copy master code to the master host
+    copy:
+      src: master_software/
+      dest: /home/master/master_software/
+
+  - name: ensure docker registry is available
+    apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
+
+  - name: ensure docker and dependencies are installed
+    apt: name=docker-ce update_cache=yes
+
+  - name: install python3
+    apt: name=python3 state=present
+
+  - name: install python3-pip
+    apt: name=python3-pip state=present
+
+  - name: install ufw
+    apt: name=ufw state=present
+
+  - name: change directory to /home/master/master_software
+    shell: cd /home/master/master_software
+
+  - name: install requirements for main api
+    shell: pip3 install -r /home/master/master_software/api/app/requirements.txt
+
+  - name: install requirements queue system 
+    shell: pip3 install -r /home/master/master_software/QueueHandler/requirements.txt
+
+
+  - ufw:
+     state: enabled
+     policy: deny
+
+  - ufw:
+     logging: on
+
+  - ufw:
+     rule: allow
+     port: 8000
+     proto: tcp
+  - ufw:
+     rule: allow
+     port: 9000
+     proto: tcp
+  - ufw:
+     rule: allow
+     port: 22
+     proto: tcp
+
+  - name: add master user
+    user: 
+      name: master
+      password: master
+      groups: sudo
+      state: present
+
+  - name: Log into DockerHub
+    docker_login:
+      username: argusproof
+      password: DeltaTeam
+
+
+  - name: Pull the latest images from private repository on DockerHub
+    shell: docker image pull --all-tags argusproof/argusproof_deltateam
+   
+  - name: run uvicorn on the resulthandler api
+    shell: cd /home/master/master_software/QueueHandler && python3 master.py
+    async: 45
+    poll: 0
+  
+  - name: run uvicorn on the resulthandler api
+    shell: cd /home/master/master_software/ResultHandler/ && uvicorn ResultHandler:app --no-access-log --host 0.0.0.0 --port 8001 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
+    async: 45
+    poll: 0
+  - name: run uvicorn on the main api
+    shell: cd /home/master/master_software/api/app/ && uvicorn main:app --reload --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
+    async: 45
+    poll: 0
+
+
+    

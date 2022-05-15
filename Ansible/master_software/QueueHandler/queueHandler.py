@@ -70,7 +70,7 @@ def Queue(item):
         mydb = mysql.connector.connect(
         host="securityprojecthowsami.mysql.database.azure.com",
         user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
-        password="Honden120",
+        password="DeltaGroepPassword#",
         database="securityproject")
         mycursor = mydb.cursor()
         sql = "INSERT INTO `Result`(IP,URL,RESULT,FINISHED) values(%s,%s,%s,%s);"

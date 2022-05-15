@@ -6,7 +6,7 @@
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
 
-  - name: copy src.txt as dest.txt in the same dir 
+  - name: copy slave code to the slave host
     copy:
       src: slave_software/
       dest: /home/slave/slave_software/
@@ -26,11 +26,11 @@
   - name: install ufw
     apt: name=ufw state=present
 
-  - name: change directory to /home/slave_software
+  - name: change directory to /home/slave/slave_software
     shell: cd /home/slave/slave_software
 
   - name: install requirements
-    shell: pip3 install -r /home/slave_software/requirements.txt
+    shell: pip3 install -r /home/slave/slave_software/requirements.txt
 
   - ufw:
      state: enabled
@@ -43,17 +43,14 @@
      rule: allow
      port: 8000
      proto: tcp
-
+  - ufw:
+     rule: allow
+     port: 9000
+     proto: tcp
   - ufw:
      rule: allow
      port: 22
      proto: tcp
-
-  - name: Setup alternate SSH port
-    lineinfile:
-     dest: "/etc/ssh/sshd_config"
-     regexp: "^Port"
-     line: "Port 2222"
 
   - name: add slave user
     user: 
@@ -70,9 +67,13 @@
 
   - name: Pull the latest images from private repository on DockerHub
     shell: docker image pull --all-tags argusproof/argusproof_deltateam
+   
+  - name: docker volume create portainer_data
+    shell: docker volume create portainer_data
 
   - name: run uvicorn
     shell: cd /home/slave/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
-
+  - name: post ip to master
+    shell: 
 
     

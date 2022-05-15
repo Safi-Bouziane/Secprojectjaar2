@@ -1,2 +1,4 @@
 [mac]
 10.211.55.12 ansible_user=mac
+[macmaster]
+10.211.55.13 ansible_user=mac
