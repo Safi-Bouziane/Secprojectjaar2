@@ -70,22 +70,40 @@ while 1:
                 sql = "SELECT MAX(ID) FROM result;"
                 mycursor.execute(sql)
                 id = mycursor.fetchone()
-                id = list(id)
                 if id[0] == None:
-                  id[0] = 0
+                  id = 0
+                else:
+                  id = id[0] + 1
                 cpubar.n = psutil.cpu_percent()
                 rambar.n = psutil.virtual_memory().percent
-                if cpubar.n < 20 and rambar.n < 20:
+                if cpubar.n < 1 and rambar.n < 1:
                     sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                     mycursor.execute(sql)
                     mydb.commit()
                     startcontainers(item,id[0]+1)
                 else:
-                    slave1cpu = requests.get('https://192.168.1.10:8000/cpuload', verify = False)
-                    slave2cpu = requests.get('https://192.168.1.174:8000/cpuload', verify = False)
-                    if slave1cpu > slave2cpu:
-                        test = requests.post('https://192.168.1.174:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
+                    slave1cpu = requests.get('http://192.168.253.149:8000/cpuload', verify = False)
+                    cpu1= slave1cpu.content.decode("utf-8")
+                    cpu1 = float(cpu1)
+                    slave2cpu = requests.get('http://192.168.253.150:8000/cpuload', verify = False)
+                    cpu2= slave2cpu.content.decode("utf-8") 
+                    cpu2 = float(cpu2)
+                    if cpu1 < 60 :
+                      sql = f"DELETE FROM queue Where id = {dbbs[8]};"
+                      mycursor.execute(sql)
+                      mydb.commit()
+                      print("sent to slave1")
+                      print(item)
+                      test = requests.post('http://192.168.253.149:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
+                    elif cpu2 < 60:
+                      sql = f"DELETE FROM queue Where id = {dbbs[8]};"
+                      mycursor.execute(sql)
+                      mydb.commit()
+                      print(item)
+                      print("sent to slave2")
+                      test = requests.post('http://192.168.253.150:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
                     else:
-                        test = requests.post('https://192.168.1.10:8000/add/', json={"ip": "194.0.6.1","url": "www.ap.be","id": "1","test1": true,"test2": true,"test3": true,"test4": true,"test5": true,"test6": true})
+                      print("servers are busy")
+                      print(str(cpu1) + "   " + str(cpu2))
+                      time.sleep(3)
         wait = checkdb()
-    

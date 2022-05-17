@@ -1,8 +1,17 @@
 import os
-
-
+import mysql.connector
 
 def StartTests(ip,id,url,test1,test2,test3,test4,test5,test6):
+    mydb = mysql.connector.connect(
+    host="securityprojecthowsami.mysql.database.azure.com",
+    user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+    password="DeltaGroepPassword#",
+    database="securityproject")
+    mycursor = mydb.cursor()
+    sql = f"INSERT INTO result (IP,ID) VALUES (%s,%s);"
+    val = (ip, id)
+    mycursor.execute(sql, val)
+    mydb.commit()
     if  test1:
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test1 python3 testhttpredirect.py {url} {id}')
     if  test2:

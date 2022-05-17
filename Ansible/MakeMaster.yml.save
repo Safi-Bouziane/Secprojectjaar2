@@ -82,16 +82,19 @@
   - name: rebuild test6 with latest github changes
     shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test6 -f dockerfile.ipv6 . && docker tag test6:latest argusproof/argusproof_deltateam:test6 && docker push argusproof/argusproof_deltateam:test6
 
+  - name: Pull the latest images from private repository on DockerHub
+    shell: cd /home/{{ansible_user}}/master_software && docker image pull --all-tags argusproof/argusproof_deltateam
+
   - name: run master.py
     shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py
     async: 45
     poll: 0
 
   - name: run uvicorn on the resulthandler api
-    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --port 9000
+    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --port 9001
     async: 45
     poll: 0
   - name: run uvicorn on the main api
-    shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --port 8000
+    shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --port 9000
     async: 45
     poll: 0

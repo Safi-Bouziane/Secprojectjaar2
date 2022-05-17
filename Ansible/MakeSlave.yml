@@ -9,7 +9,7 @@
   - name: copy slave code to the slave host
     copy:
       src: slave_software/
-      dest: /home/slave/slave_software/
+      dest: /home/{{ansible_user}}/slave_software/
 
   - name: ensure docker registry is available
     apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
@@ -27,10 +27,10 @@
     apt: name=ufw state=present
 
   - name: change directory to /home/slave/slave_software
-    shell: cd /home/slave/slave_software
+    shell: cd /home/{{ansible_user}}/slave_software
 
   - name: install requirements
-    shell: pip3 install -r /home/slave/slave_software/requirements.txt
+    shell: pip3 install -r /home/{{ansible_user}}/slave_software/requirements.txt
 
   - ufw:
      state: enabled
@@ -66,14 +66,11 @@
       password: DeltaTeam
 
   - name: Pull the latest images from private repository on DockerHub
-    shell: docker image pull --all-tags argusproof/argusproof_deltateam
-   
+    shell: cd /home/{{ansible_user}}/slave_software && docker image pull --all-tags argusproof/argusproof_deltateam
   - name: docker volume create portainer_data
     shell: docker volume create portainer_data
 
   - name: run uvicorn
-    shell: cd /home/slave/slave_software && nohup uvicorn mainapi:app --host 0.0.0.0 --port 8000 --ssl-keyfile=./rootCA-key.pem --ssl-certfile=./rootCA.pem
-  - name: post ip to master
-    shell: 
-
-    
+    shell: cd /home/{{ansible_user}}/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000
+    async: 45
+    poll: 0
