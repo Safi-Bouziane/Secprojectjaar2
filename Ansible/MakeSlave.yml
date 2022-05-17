@@ -61,7 +61,7 @@
       username: argusproof
       password: DeltaTeam
 
- - name: rebuild test1 with latest github changes
+  - name: rebuild test1 with latest github changes
     shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test1 -f dockerfile.http . && docker tag test1:latest argusproof/argusproof_deltateam:test1 && docker push argusproof/argusproof_deltateam:test1
   - name: rebuild test2 with latest github changes
     shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test2 -f dockerfile.geoip . && docker tag test2:latest argusproof/argusproof_deltateam:test2 && docker push argusproof/argusproof_deltateam:test2
