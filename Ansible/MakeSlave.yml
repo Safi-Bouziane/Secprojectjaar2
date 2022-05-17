@@ -61,18 +61,10 @@
       username: argusproof
       password: DeltaTeam
 
-  - name: rebuild test1 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test1 -f dockerfile.http . && docker tag test1:latest argusproof/argusproof_deltateam:test1 && docker push argusproof/argusproof_deltateam:test1
-  - name: rebuild test2 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test2 -f dockerfile.geoip . && docker tag test2:latest argusproof/argusproof_deltateam:test2 && docker push argusproof/argusproof_deltateam:test2
-  - name: rebuild test3 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test3 -f dockerfile.bl . && docker tag test3:latest argusproof/argusproof_deltateam:test3 && docker push argusproof/argusproof_deltateam:test3
-  - name: rebuild test4 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test4 -f dockerfile.ssl . && docker tag test4:latest argusproof/argusproof_deltateam:test4 && docker push argusproof/argusproof_deltateam:test4
-  - name: rebuild test5 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test5 -f dockerfile.dnssec . && docker tag test5:latest argusproof/argusproof_deltateam:test5 && docker push argusproof/argusproof_deltateam:test5
-  - name: rebuild test6 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test6 -f dockerfile.ipv6 . && docker tag test6:latest argusproof/argusproof_deltateam:test6 && docker push argusproof/argusproof_deltateam:test6
+  - name: Pull the latest images from private repository on DockerHub
+    shell: cd /home/{{ansible_user}}/slave_software && docker image pull --all-tags argusproof/argusproof_deltateam
+  - name: docker volume create portainer_data
+    shell: docker volume create portainer_data
 
   - name: run uvicorn
     shell: cd /home/{{ansible_user}}/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000

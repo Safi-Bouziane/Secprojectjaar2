@@ -70,7 +70,7 @@
       password: DeltaTeam
       
   - name: Pull the latest images from private repository on DockerHub
-    shell: cd /home/{{ansible_user}}/slave_software && docker image pull --all-tags argusproof/argusproof_deltateam
+    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && docker image pull --all-tags argusproof/argusproof_deltateam
   - name: docker volume create portainer_data
     shell: docker volume create portainer_data
 
