@@ -75,12 +75,12 @@
     shell: docker volume create portainer_data
 
   - name: run master.py
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py
+    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py &
 
 
   - name: run uvicorn on the resulthandler api
-    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000
+    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000 &
 
   - name: run uvicorn on the main api
-    shell: cd /home/{{ansible_user}}/master_software/api/app/ && uvicorn main:app --host 0.0.0.0 --reload --port 8000
+    shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
 
