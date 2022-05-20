@@ -1,4 +1,4 @@
-- hosts: master
+- hosts: macmaster
   user: root
   tasks:
   - name: ensure repository key is installed

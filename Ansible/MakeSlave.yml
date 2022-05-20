@@ -1,4 +1,4 @@
-- hosts: slave1,slave2
+- hosts: mac
   user: root
   tasks:
   - name: ensure repository key is installed
