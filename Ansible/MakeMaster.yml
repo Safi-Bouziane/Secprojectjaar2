@@ -1,4 +1,4 @@
-- hosts: macmaster
+- hosts: masteruser
   user: root
   tasks:
   - name: ensure repository key is installed
@@ -76,14 +76,11 @@
 
   - name: run master.py
     shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py
-    async: 45
-    poll: 0
+
 
   - name: run uvicorn on the resulthandler api
-    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && uvicorn ResultHandler:app --host 0.0.0.0 --port 9000
-    async: 45
-    poll: 0
+    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000
+
   - name: run uvicorn on the main api
-    shell: cd /home/{{ansible_user}}/master_software/api/app/ && uvicorn main:app --host 0.0.0.0 --port 8000
-    async: 45
-    poll: 0
+    shell: cd /home/{{ansible_user}}/master_software/api/app/ && uvicorn main:app --host 0.0.0.0 --reload --port 8000
+

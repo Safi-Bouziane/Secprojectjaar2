@@ -4,6 +4,9 @@ import time
 import psutil
 import mysql.connector
 import requests
+ipslave1 = 20.230.206.207
+ipslave2 = 20.29.224.154
+
 
 def convertTuple(tup):
         # initialize an empty string
@@ -82,10 +85,10 @@ while 1:
                     mydb.commit()
                     startcontainers(item,id[0]+1)
                 else:
-                    slave1cpu = requests.get('http://192.168.253.149:8000/cpuload', verify = False)
+                    slave1cpu = requests.get(f'http://{ipslave1}:8000/cpuload', verify = False)
                     cpu1= slave1cpu.content.decode("utf-8")
                     cpu1 = float(cpu1)
-                    slave2cpu = requests.get('http://192.168.253.150:8000/cpuload', verify = False)
+                    slave2cpu = requests.get(f'http://{ipslave2}:8000/cpuload', verify = False)
                     cpu2= slave2cpu.content.decode("utf-8") 
                     cpu2 = float(cpu2)
                     if cpu1 < 60 :
@@ -94,14 +97,14 @@ while 1:
                       mydb.commit()
                       print("sent to slave1")
                       print(item)
-                      test = requests.post('http://192.168.253.149:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
+                      test = requests.post(f'http://{ipslave1}:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
                     elif cpu2 < 60:
                       sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                       mycursor.execute(sql)
                       mydb.commit()
                       print(item)
                       print("sent to slave2")
-                      test = requests.post('http://192.168.253.150:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
+                      test = requests.post(f'http://{ipslave2}:8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
                     else:
                       print("servers are busy")
                       print(str(cpu1) + "   " + str(cpu2))

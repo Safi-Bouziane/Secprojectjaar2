@@ -1,4 +1,4 @@
-- hosts: mac
+- hosts: slave1user,slave2user
   user: root
   tasks:
   - name: ensure repository key is installed
@@ -67,6 +67,4 @@
     shell: docker volume create portainer_data
 
   - name: run uvicorn
-    shell: cd /home/{{ansible_user}}/slave_software && uvicorn mainapi:app --host 0.0.0.0 --port 8000
-    async: 45
-    poll: 0
+    shell: cd /home/{{ansible_user}}/slave_software && nohup uvicorn mainapi:app --host 0.0.0.0 --reload --port 8000

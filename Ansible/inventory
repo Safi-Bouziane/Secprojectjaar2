@@ -10,3 +10,14 @@
 192.168.253.149 ansible_user=slave1
 [slave2]
 192.168.253.150 ansible_user=slave2
+
+
+[masteruser]
+20.29.225.200 ansible_user=masteruser
+[slave1user]
+20.230.206.207 ansible_user=slave1user
+[slave2user]
+20.29.224.154 ansible_user=slave2user
+
+
+
