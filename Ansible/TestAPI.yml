@@ -1,8 +1,6 @@
 - hosts: masteruser
   user: root
   tasks:
-  - name: run master.py
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py &
 
   - name: run uvicorn on the resulthandler api
     shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000 &
@@ -10,3 +8,5 @@
   - name: run uvicorn on the main api
     shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
 
+  - name: run master.py
+    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && python3 master.py &
