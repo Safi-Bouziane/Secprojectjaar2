@@ -23,9 +23,9 @@ class UserSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "fullname": "Abdulazeez Abdulazeez Adeshina",
-                "email": "abdulazeez@x.com",
-                "password": "weakpassword"
+                "fullname": "DeltaUser",
+                "email": "argusproof@outlook.com",
+                "password": "hetpassword;)"
             }
         }
 
@@ -36,7 +36,7 @@ class UserLoginSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "email": "abdulazeez@x.com",
-                "password": "weakpassword"
+                "email": "argusproof@outlook.dom",
+                "password": "hetpassword;)"
             }
         }

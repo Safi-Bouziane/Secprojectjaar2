@@ -1,12 +1,13 @@
-from fastapi import FastAPI,BackgroundTasks,File, UploadFile
+from fastapi import FastAPI,BackgroundTasks,File, UploadFile, Body, Depends
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 from subprocess import Popen
 
-from app.model import PostSchema, UserSchema, UserLoginSchema
-from app.auth.auth_bearer import JWTBearer
-from app.auth.auth_handler import signJWT
+from model import PostSchema, UserSchema, UserLoginSchema
+from auth.auth_bearer import JWTBearer
+from auth.auth_handler import signJWT
 
+users = []
 
 import mysql.connector
 
@@ -59,10 +60,17 @@ async def create_upload_file(uploaded_file: UploadFile):
         file_object.write(uploaded_file.file.read())
     return {"info": f"file '{uploaded_file.filename}' saved at '{file_location}'"}
 
-@app.post("/user/signup", tags=["user"])
-async def create_user(user: UserSchema = Body(...)):
-    users.append(user) # replace with db call, making sure to hash the password first
-    return signJWT(user.email)
+systemUser = {
+  "fullname": "DeltaUser",
+  "email": "argusproof@outlook.com",
+  "password": "DeltaUserPassword#"
+}
+
+def create_user(user: UserSchema = Body(...)):
+    users.append(user) 
+
+
+create_user(systemUser)
 
 
 @app.post("/user/login", tags=["user"])
@@ -74,3 +82,6 @@ async def user_login(user: UserLoginSchema = Body(...)):
     }
 
 
+
+
+# https://testdriven.io/blog/fastapi-jwt-auth/
