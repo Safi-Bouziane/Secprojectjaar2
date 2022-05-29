@@ -79,7 +79,7 @@ while 1:
                   id = id[0] + 1
                 cpubar.n = psutil.cpu_percent()
                 rambar.n = psutil.virtual_memory().percent
-                if cpubar.n < 1 and rambar.n < 1:
+                if cpubar.n < 20 and rambar.n < 20:
                     sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                     mycursor.execute(sql)
                     mydb.commit()

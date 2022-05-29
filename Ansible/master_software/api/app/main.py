@@ -3,6 +3,11 @@ from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 from subprocess import Popen
 
+from app.model import PostSchema, UserSchema, UserLoginSchema
+from app.auth.auth_bearer import JWTBearer
+from app.auth.auth_handler import signJWT
+
+
 import mysql.connector
 
 def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
@@ -19,6 +24,11 @@ def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
 
     mydb.commit()
 
+def check_user(data: UserLoginSchema):
+    for user in users:
+        if user.email == data.email and user.password == data.password:
+            return True
+    return False
 
 class Resultaat(BaseModel):
     ip: str
@@ -36,7 +46,8 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/add/", status_code = 200)
+
+@app.post("/add/", dependencies=[Depends(JWTBearer())])
 async def read_user_item(item: Resultaat):
     InsertIntoQueue(item.ip,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6)
     return "ok"
@@ -48,8 +59,18 @@ async def create_upload_file(uploaded_file: UploadFile):
         file_object.write(uploaded_file.file.read())
     return {"info": f"file '{uploaded_file.filename}' saved at '{file_location}'"}
 
-##@app.get("/{param}")
-##def read_user_item(url: str):
-    ##Popen('python3 ' + url, shell=True)
-    ##return "ok"
+@app.post("/user/signup", tags=["user"])
+async def create_user(user: UserSchema = Body(...)):
+    users.append(user) # replace with db call, making sure to hash the password first
+    return signJWT(user.email)
+
+
+@app.post("/user/login", tags=["user"])
+async def user_login(user: UserLoginSchema = Body(...)):
+    if check_user(user):
+        return signJWT(user.email)
+    return {
+        "error": "Wrong login details!"
+    }
+
 
