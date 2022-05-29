@@ -66,11 +66,12 @@ systemUser = {
   "password": "DeltaUserPassword#"
 }
 
-def create_user(user: UserSchema = Body(...)):
-    users.append(user) 
 
+@app.post("/user/signup", tags=["user"])
+async def create_user(user: UserSchema = Body(...)):
+    users.append(user) # replace with db call, making sure to hash the password first
+    return signJWT(user.email)
 
-create_user(systemUser)
 
 
 @app.post("/user/login", tags=["user"])
