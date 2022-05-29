@@ -43,28 +43,11 @@ class Resultaat(BaseModel):
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
 
 @app.post("/add/", dependencies=[Depends(JWTBearer())])
 async def read_user_item(item: Resultaat):
     InsertIntoQueue(item.ip,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6)
     return "ok"
-
-@app.post("/uploadfile/")
-async def create_upload_file(uploaded_file: UploadFile):
-    file_location = f"/home/azureuser/project/QueueHandler/{uploaded_file.filename}"
-    with open(file_location, "wb+") as file_object:
-        file_object.write(uploaded_file.file.read())
-    return {"info": f"file '{uploaded_file.filename}' saved at '{file_location}'"}
-
-systemUser = {
-  "fullname": "DeltaUser",
-  "email": "argusproof@outlook.com",
-  "password": "DeltaUserPassword#"
-}
 
 
 @app.post("/user/signup", tags=["user"])

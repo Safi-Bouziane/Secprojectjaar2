@@ -31,8 +31,7 @@
 
   - name: install requirements for main api
     shell: pip3 install -r /home/{{ansible_user}}/master_software/api/app/requirements.txt
-  - name: install pythonn multipart
-    shell: pip3 install python-multipart
+
   - name: install requirements queue system 
     shell: pip3 install -r /home/{{ansible_user}}/master_software/QueueHandler/requirements.txt
 
