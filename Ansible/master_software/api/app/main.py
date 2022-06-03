@@ -1,5 +1,5 @@
 from fastapi import FastAPI,BackgroundTasks,File, UploadFile, Body, Depends
-from pydantic import BaseModel
+from pydantic import *
 from fastapi.staticfiles import StaticFiles
 from subprocess import Popen
 
