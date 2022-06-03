@@ -3,7 +3,7 @@ from pydantic import *
 from fastapi.staticfiles import StaticFiles
 from subprocess import Popen
 
-from model import PostSchema, UserSchema, UserLoginSchema
+from model import *
 from auth.auth_bearer import JWTBearer
 from auth.auth_handler import signJWT
 
