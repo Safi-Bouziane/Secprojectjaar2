@@ -1,4 +1,4 @@
-#Hoe zet je nginx op?
+# Hoe zet je nginx op?
 Ik heb volgende sites gebruikt om alles op te zetten. ik heb over in plaats van your_domain secproject gebruikt houd daar rekening mee.
 <br>
 https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
@@ -78,8 +78,8 @@ server {
     return 404; # managed by Certbot
 }
 ```
-##api
-Onze landing page staat in /var/www/secproject/html. Dit is de oagina die je krijgt als je naar ons domein (deltateam.be) surft. je hebt als endpoints ook /result en /api.
+## api
+Onze landing page staat in /var/www/secproject/html. Dit is de pagina die je krijgt als je naar ons domein (deltateam.be) surft. je hebt als endpoints ook /result en /api.
 in /api zie je documentatie van onze main api hier kan je data naar onze queue sturen. Voor je dat kan doen moet je je eerst registreren en inloggen. Je krijgt dan een token die je kan gebruiken om de main api te gebruiken.
 in /result kan je het resultaat van de testen opvragen. je hebt hier 2 mogelijke api calls.
 1) results hier geef je een ip mee en krijg je de test resultaten terug.
