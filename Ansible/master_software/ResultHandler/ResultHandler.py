@@ -2,7 +2,7 @@ from fastapi import FastAPI, Response
 import mysql.connector
 from pydantic import BaseModel
 
-app = FastAPI(root_path="/api")
+app = FastAPI(openapi_url = "/resulhandleropenapi.json")
 
 mydb = mysql.connector.connect(
 host="securityprojecthowsami.mysql.database.azure.com",
