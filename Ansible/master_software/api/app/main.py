@@ -12,15 +12,6 @@ users = []
 import mysql.connector
 from mysqlInsert import *
 
-def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
-    mydb = make_db_conn(mydb)
-    mycursor = mydb.cursor()
-    sql = "INSERT INTO `queue`(IP,URL,TEST1,TEST2,TEST3,TEST4,TEST5,TEST6) values(%s,%s,%s,%s,%s,%s,%s,%s);"
-    val = (IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6)
-    mycursor.execute(sql, val)
-
-    mydb.commit()
-
 def check_user(data: UserLoginSchema):
     for user in users:
         if user.email == data.email and user.password == data.password:
