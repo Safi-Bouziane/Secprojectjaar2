@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SecProjectArgus
 ### Hoe start je het systeem?
 In SecProjectArgus/Ansible/ steken beide yaml files.
@@ -49,6 +48,3 @@ password: DeltaTeam
 ```
 docker image pull --all-tags argusproof/argusproof_deltateam
 ```
-=======
-pops
->>>>>>> main
