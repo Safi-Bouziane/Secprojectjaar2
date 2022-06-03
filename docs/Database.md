@@ -34,3 +34,5 @@ CREATE TABLE `queue` (
 ```
 ## Geef de user ook enkel de juiste rechten.
 ![image](https://user-images.githubusercontent.com/78704181/171838550-b1d43932-08be-4817-a3dd-0d956dcfc9ed.png)
+## Extra info
+Als je een andere database gebruikt ga je dit ook in code moete aanpasssen!!
