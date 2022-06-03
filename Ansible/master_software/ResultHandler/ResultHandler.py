@@ -20,9 +20,9 @@ async def root():
 @app.get("/result/{ip}")
 async def read_item(ip):
     mycursor = mydb.cursor()
-    sql = "SELECT * FROM `Result` WHERE IP = '"+ip+"';"
-    print(sql)
-    mycursor.execute(sql)
+    sql = "SELECT * FROM `Result` WHERE IP = IP VALUES(IP);"
+    val = (ip)
+    mycursor.execute(sql,val)
     result = mycursor.fetchall()
     return {"message": result}
 
