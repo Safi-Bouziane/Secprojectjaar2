@@ -3,6 +3,7 @@
 Fork deze repo eerst. Dan kan je het systeem aanpassen zoveel als je wilt.
 
 In SecProjectArgus/Ansible/ steken beide yaml files. Pas hier in de inventory van de slaves en master aan indien nodig. Pas in master.py de ip's van de slaves ook aan.
+<br>
 Start de slave.yaml file op deze gaat de slaves builden.
 <br>
 ```
