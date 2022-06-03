@@ -10,14 +10,10 @@ from auth.auth_handler import signJWT
 users = []
 
 import mysql.connector
+from mysqlInsert import *
 
 def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
-    mydb = mysql.connector.connect(
-    host="securityprojecthowsami.mysql.database.azure.com",
-    user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
-    password="DeltaGroepPassword#",
-    database="securityproject"
-    )
+    mydb = make_db_conn(mydb)
     mycursor = mydb.cursor()
     sql = "INSERT INTO `queue`(IP,URL,TEST1,TEST2,TEST3,TEST4,TEST5,TEST6) values(%s,%s,%s,%s,%s,%s,%s,%s);"
     val = (IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6)
@@ -64,8 +60,4 @@ async def user_login(user: UserLoginSchema = Body(...)):
     return {
         "error": "Wrong login details!"
     }
-
-
-
-
 # https://testdriven.io/blog/fastapi-jwt-auth/
