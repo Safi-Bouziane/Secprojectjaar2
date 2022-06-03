@@ -22,6 +22,7 @@ password: DeltaTeam
 docker image pull --all-tags argusproof/argusproof_deltateam
 ```
 ### Hoe start je het systeem?
+In SecProjectArgus/Ansible/ steken beide yaml files.
 Start de slave.yaml file op deze gaat de slaves builden.
 <br>
 ```
@@ -32,9 +33,12 @@ Start dan master.yaml om de master te builden.
 ```
 ansible-playbook MakeMaster.yml
 ```
-### To do
-slave  en master api's blijven niet aan met ansible. dit zorgt voor errors in master.py dan sluit deze ook.
-### tijdelijke oplossing
+ga dan naar de master server en start master.py
+```
+python3 ~/SecProjectArgus/Ansible/master_software/QueueHandler/master.py
+```
+
+## Als je alles manueel wilt opstarten
 start de api's manueel in de 2 slaves. ga naar SecProjectArgus/Ansible/slave_software/ en voer volgend commando op beide hosts.
 ```
 uvicorn mainapi:app --host 0.0.0.0 --port 8000 
@@ -51,4 +55,3 @@ start de resulthandler api op. ga naar ~/SecProjectArgus/Ansible/master_software
 ```
 uvicorn ResultHandler:app --host 0.0.0.0 --port 9000 
 ```
-
