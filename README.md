@@ -52,7 +52,7 @@ password: DeltaTeam
 ```
 docker image pull --all-tags argusproof/argusproof_deltateam
 ```
-### Als je de images wilt rebuilden doe volgend commando in SecProjectArgus/Ansible/.
+### Als je de images wilt rebuilden doe volgend commando in SecProjectArgus/Ansible/
 ```
 ansible-playbook rebuild_images_on_master.yml
 ```
