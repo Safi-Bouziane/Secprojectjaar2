@@ -2,7 +2,7 @@ from fastapi import FastAPI, Response
 import mysql.connector
 from pydantic import BaseModel
 
-app = FastAPI(root_path="")
+app = FastAPI(root_path="/api")
 
 mydb = mysql.connector.connect(
 host="securityprojecthowsami.mysql.database.azure.com",
@@ -13,7 +13,7 @@ class verify(BaseModel):
     ip: str
     verify: str
 
-@app.get("/api")
+@app.get("/")
 async def root():
     return {"message": "Hello World"}
 
