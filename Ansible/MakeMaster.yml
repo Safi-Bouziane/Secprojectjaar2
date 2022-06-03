@@ -7,7 +7,7 @@
       state: present
 
   - name: copy master code to the master host
-    copy:
+    synchronize:
       src: master_software/
       dest: /home/{{ansible_user}}/master_software/
 
