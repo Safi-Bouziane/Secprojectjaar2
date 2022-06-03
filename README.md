@@ -1,26 +1,4 @@
 # SecProjectArgus
-
-## Voor de api op te starten doe:
-```
-uvicorn main:app --host 0.0.0.0 --port 8000 
-```
-## Voor de queue op te starten, start het master.py scriptje op.
-
-## Voor het downloade van alle images nodig voor de test containers te builden en maken run deze commando's
-
-### login op docker
-```
-docker login
-```
-### Inlog gegevens:
-```
-username: argusproof
-password: DeltaTeam
-```
-### Om alle images tegelijk te pullen:
-```
-docker image pull --all-tags argusproof/argusproof_deltateam
-```
 ### Hoe start je het systeem?
 In SecProjectArgus/Ansible/ steken beide yaml files.
 Start de slave.yaml file op deze gaat de slaves builden.
@@ -54,4 +32,19 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 start de resulthandler api op. ga naar ~/SecProjectArgus/Ansible/master_software/ResultHandler
 ```
 uvicorn ResultHandler:app --host 0.0.0.0 --port 9000 
+```
+## Voor het downloade van alle images nodig voor de test containers te builden en maken run deze commando's
+
+### login op docker
+```
+docker login
+```
+### Inlog gegevens:
+```
+username: argusproof
+password: DeltaTeam
+```
+### Om alle images tegelijk te pullen:
+```
+docker image pull --all-tags argusproof/argusproof_deltateam
 ```
