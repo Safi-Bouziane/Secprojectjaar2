@@ -10,7 +10,18 @@ from auth.auth_handler import signJWT
 users = []
 
 import mysql.connector
-from mysqlInsert import *
+def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
+    mydb = mysql.connector.connect(
+    host="securityprojecthowsami.mysql.database.azure.com",
+    user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+    password="DeltaGroepPassword#",
+    database="securityproject"
+    )
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO `queue`(IP,URL,TEST1,TEST2,TEST3,TEST4,TEST5,TEST6) values(%s,%s,%s,%s,%s,%s,%s,%s);"
+    val = (IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6)
+    mycursor.execute(sql, val)
+    mydb.commit()
 
 def check_user(data: UserLoginSchema):
     for user in users:
