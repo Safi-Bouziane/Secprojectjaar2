@@ -78,7 +78,3 @@
 
   - name: run uvicorn on the main api
     shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
-
-  - name: run master.py
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && nohup python3 master.py
-
