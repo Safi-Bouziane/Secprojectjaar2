@@ -7,8 +7,6 @@
 - Kamil Grielens
 
 ## Documentatie
-Dit is de documentatie voor het ArgusProof Security Project.
-
 ### Wat kan je verwachten
 - Volledige documentatie van de gebruikte componenten.
 - Uitleg over de werking van de code.
