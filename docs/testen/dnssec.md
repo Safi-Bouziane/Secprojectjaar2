@@ -6,9 +6,7 @@ Met deze test wordt er gekeken of het meegegeven ip adres DNSSEC heeft.
 ## Werking van de code
 Voor de test hebben we volgende libraries nodig.
 ```
-import sys
 import urllib.request
-import mysql.connector
 ```
 
 Met volgende code checken we op de aanwezigheid van DNSSEC.
