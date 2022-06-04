@@ -1,6 +1,17 @@
-- hosts: masteruser
+- hosts: mac
   user: root
   tasks:
+  - name: Updata and upgrade
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400
+  - name: add master user
+    user:
+      name: master
+      password: master
+      groups: sudo
+      state: present
   - name: ensure repository key is installed
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
@@ -9,7 +20,27 @@
   - name: copy master code to the master host
     synchronize:
       src: master_software/
-      dest: /home/{{ansible_user}}/master_software/
+      dest: /home/master/master_software/
+  - name: copy startup code to the master host
+    synchronize:
+      src: run.sh
+      dest: /usr/local/bin/
+  - name: copy startup service to the master host
+    synchronize:
+      src: startup.service
+      dest: /etc/systemd/system/
+
+  - name: add the correct rights to the startup file
+    shell: sudo chmod 644 /etc/systemd/system/startup.service
+ 
+  - name: add the correct rights to the startup file
+    shell: sudo chmod 744 /usr/local/bin/run.sh
+
+  - name: reload deamon
+    shell: sudo systemctl daemon-reload
+
+  - name: enable startup service
+    shell: sudo systemctl enable startup.service
 
   - name: ensure docker registry is available
     apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
@@ -27,16 +58,15 @@
     apt: name=ufw state=present
 
   - name: change directory to /home/master/master_software
-    shell: cd /home/{{ansible_user}}/master_software
+    shell: cd /home/master/master_software
 
   - name: install requirements for main api
-    shell: pip3 install -r /home/{{ansible_user}}/master_software/api/app/requirements.txt
+    shell: pip3 install -r /home/master/master_software/api/app/requirements.txt
   - name: install email validation
     shell: pip3 install pydantic[email]
 
   - name: install requirements queue system 
-    shell: pip3 install -r /home/{{ansible_user}}/master_software/QueueHandler/requirements.txt
-
+    shell: pip3 install -r /home/master/master_software/QueueHandler/requirements.txt
 
   - ufw:
      state: enabled
@@ -57,13 +87,8 @@
      rule: allow
      port: 22
      proto: tcp
-
-  - name: add master user
-    user:
-      name: master
-      password: master
-      groups: sudo
-      state: present
+  - name: enable ufw on system startup
+    shell: sudo systemctl enable ufw
 
   - name: Log into DockerHub
     docker_login:
@@ -71,12 +96,12 @@
       password: DeltaTeam
       
   - name: Pull the latest images from private repository on DockerHub
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler && docker image pull --all-tags argusproof/argusproof_deltateam
+    shell: cd /home/master/master_software/QueueHandler && docker image pull --all-tags argusproof/argusproof_deltateam
   - name: docker volume create portainer_data
     shell: docker volume create portainer_data
 
   - name: run uvicorn on the resulthandler api
-    shell: cd /home/{{ansible_user}}/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000 &
+    shell: cd /home/master/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000 &
 
   - name: run uvicorn on the main api
-    shell: cd /home/{{ansible_user}}/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
+    shell: cd /home/master/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
