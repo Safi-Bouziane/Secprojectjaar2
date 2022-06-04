@@ -1,4 +1,4 @@
-# SecProjectArgus - of is het toch deze?
+# SecProjectArgus
 ### Hoe start je het systeem?
 Fork deze repo eerst. Dan kan je het systeem aanpassen zoveel als je wilt.
 
