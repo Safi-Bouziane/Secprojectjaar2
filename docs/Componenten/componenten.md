@@ -2,13 +2,13 @@
 Dit is de verzameling van de gebruikte componenten van het project.
 
 ## Ansible
-* [Ansible](ansible.md)
+* [Ansible](Componenten/ansible.md)
 
 ## Database
-* [Database](Database.md)
+* [Database](Componenten/Database.md)
 
 ## Nginx
-* [Nginx](Nginx.md)
+* [Nginx](Componenten/Nginx.md)
 
 ## API
-* [API](api.md)
+* [API](Componenten/api.md)
