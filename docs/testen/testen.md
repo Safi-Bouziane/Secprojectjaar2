@@ -1,6 +1,6 @@
 # Testen
 
-Hier vind je een overzicht van de gebruikte testen in het project.
+Hier vind je een overzicht van de gebruikte testen in het project. Alle testen zijn geschreven in Python.
 
 ### Verschillende testen
 * [Blacklist check](/testen/blacklist.md)
