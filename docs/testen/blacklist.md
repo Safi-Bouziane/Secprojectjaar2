@@ -4,7 +4,6 @@
 Met deze test wordt er gekeken of het meegegeven ip terug te vinden is op een blacklist met 56 mogelijkheden.
 
 ## Code
-
 ```
 import os
 import sys
