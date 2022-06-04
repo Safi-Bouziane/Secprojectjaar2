@@ -7,7 +7,7 @@
       state: present
 
   - name: copy slave code to the slave host
-    copy:
+    synchronize:
       src: slave_software/
       dest: /home/{{ansible_user}}/slave_software/
 

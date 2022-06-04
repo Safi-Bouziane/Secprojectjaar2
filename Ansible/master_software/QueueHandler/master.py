@@ -83,7 +83,7 @@ while 1:
                     sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                     mycursor.execute(sql)
                     mydb.commit()
-                    startcontainers(item,id[0]+1)
+                    startcontainers(item,id+1)
                 else:
                     slave1cpu = requests.get('http://'+ipslave1+':8000/cpuload', verify = False)
                     cpu1= slave1cpu.content.decode("utf-8")
