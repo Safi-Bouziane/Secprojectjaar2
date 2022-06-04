@@ -1,8 +1,8 @@
 * Documentatie
   * [Introductie](/intro/introductie.md)
-  * [Componenten](/componenten/componenten.md)
-    * [Ansible](/componenten/ansible.md)
-    * [Database](/componenten/Database.md)
-    * [Nginx](/componenten/Nginx.md)
-    * [API](/componenten/api.md)
+  * [Componenten](/Componenten/componenten.md)
+    * [Ansible](/Componenten/ansible.md)
+    * [Database](/Componenten/Database.md)
+    * [Nginx](/Componenten/Nginx.md)
+    * [API](/Componenten/api.md)
   * [Testen](/testen/testen.md)
