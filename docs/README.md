@@ -1,4 +1,4 @@
-# SecProjectArgus - test werkt dit???
+# SecProjectArgus
 ### Hoe start je het systeem?
 In SecProjectArgus/Ansible/ steken beide .yaml files.
 Start de slave.yaml file op en deze zal de slaves builden.
