@@ -2,7 +2,7 @@
 
 Hier vind je een overzicht van de gebruikte testen in het project.
 
-## Verschillende testen
+### Verschillende testen
 * [Blacklist check](/testen/blacklist.md)
 * [DNSSEC check](/testen/dnssec.md)
 * [geoip](/testen/geoip.md)
@@ -11,5 +11,5 @@ Hier vind je een overzicht van de gebruikte testen in het project.
 * [Cookies check](/testen/cookie.md)
 * [Shodan check](/testen/shodan.md)
 
-## Testen toevoegen
+### Testen toevoegen
 * [Hoe testen toevoegen](/testen/add_test.md)
