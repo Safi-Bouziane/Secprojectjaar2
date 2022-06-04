@@ -8,7 +8,7 @@ Hier vind je een overzicht van de gebruikte testen in het project. Alle testen z
 * [geoip](/testen/geoip.md)
 * [http redirectie](/testen/httphttps.md)
 * [SSL check](/testen/ssl.md)
-* [Cookies check](/testen/cookie.md)
+* [Ipv6 check](/testen/ipv6.md)
 * [Shodan check](/testen/shodan.md)
 
 ### Testen toevoegen
