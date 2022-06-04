@@ -1,2 +1,2 @@
-* Introductie
-  * [Documentatie](/intro/introductie.md)
+* Documentatie
+  * [Introductie](/intro/introductie.md)
