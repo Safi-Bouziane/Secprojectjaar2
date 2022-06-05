@@ -11,6 +11,8 @@ Hier vind je een overzicht van de gebruikte testen in het project. Alle testen z
 * [Ipv6 check](/testen/ipv6.md)
 * [Shodan check](/testen/shodan.md)
 * [Spf check](/testen/spf.md)
+* [Dmarc check](/testen/dmarc.md)
+
 
 ### Testen toevoegen
 * [Hoe testen toevoegen](/testen/add_test.md)
