@@ -111,3 +111,16 @@ while 1:
                       print(str(cpu1) + "   " + str(cpu2))
                       time.sleep(3)
         wait = checkdb()
+
+
+#/***************************************************************
+#*
+#* Copyright (Wouter Weemaes, Safi Bouziane, Kamil Grielens, Robbe Willeme) - All rights reserved. 
+#*
+#* Unauthorized use, copy, modify, merge, publish, distribute, sublicense, 
+#* and/or sell any parts of the software/source code is strictly prohibited.
+#* Proprietary and confidential
+#* License: No license. 
+#* Written by: (Wouter Weemaes) (wouterweemaes@outlook.com), (06/2022)
+#*
+#****************************************************************/

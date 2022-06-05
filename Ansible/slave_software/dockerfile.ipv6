@@ -3,3 +3,17 @@ FROM python:latest
 RUN pip3 install dnspython
 run pip3 install mysql-connector-python
 COPY dnsipv6_check.py ./
+
+
+
+#/***************************************************************
+#*
+#* Copyright (Wouter Weemaes, Safi Bouziane, Kamil Grielens, Robbe Willeme) - All rights reserved. 
+#*
+#* Unauthorized use, copy, modify, merge, publish, distribute, sublicense, 
+#* and/or sell any parts of the software/source code is strictly prohibited.
+#* Proprietary and confidential
+#* License: No license. 
+#* Written by: (Wouter Weemaes) (wouterweemaes@outlook.com), (06/2022)
+#*
+#****************************************************************/

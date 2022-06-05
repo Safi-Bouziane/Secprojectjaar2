@@ -24,3 +24,18 @@ def StartTests(ip,id,url,test1,test2,test3,test4,test5,test6):
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test5 python3 dnssec_check.py {url} {id}')
     if  test6:
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test6 python3 dnsipv6_check.py {url} {id}')
+
+
+
+
+#/***************************************************************
+#*
+#* Copyright (Wouter Weemaes, Safi Bouziane, Kamil Grielens, Robbe Willeme) - All rights reserved. 
+#*
+#* Unauthorized use, copy, modify, merge, publish, distribute, sublicense, 
+#* and/or sell any parts of the software/source code is strictly prohibited.
+#* Proprietary and confidential
+#* License: No license. 
+#* Written by: (Wouter Weemaes) (wouterweemaes@outlook.com), (06/2022)
+#*
+#****************************************************************/
