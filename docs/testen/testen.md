@@ -10,7 +10,7 @@ Hier vind je een overzicht van de gebruikte testen in het project. Alle testen z
 * [SSL check](/testen/ssl.md)
 * [Ipv6 check](/testen/ipv6.md)
 * [Shodan check](/testen/shodan.md)
-* [Shodan check](/testen/spf.md)
+* [Spf check](/testen/spf.md)
 
 ### Testen toevoegen
 * [Hoe testen toevoegen](/testen/add_test.md)

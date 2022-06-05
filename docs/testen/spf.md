@@ -1,7 +1,7 @@
 # SPF record check
 
 ## Bedoeling van de check
-Deze test wordt nagekeken of het domein beschikt over SPF-records
+In deze test wordt er nagekeken of het domein beschikt over SPF-records
 
 ## werking van de code 
 Voor de test hebben we volgende libraries nodig.
