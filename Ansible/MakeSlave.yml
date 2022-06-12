@@ -15,10 +15,10 @@
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
 
-  - name: copy master code to the master host
+  - name: copy slave code to the master host
     synchronize:
       src: slave_software/
-      dest: /home/master/slave_software/
+      dest: /home/slave/slave_software/
   
   - name: copy startup code to the master host
     synchronize:
@@ -74,12 +74,9 @@
 
   - name: Pull the latest images from private repository on DockerHub
     shell: cd /home/slave/slave_software && docker image pull --all-tags argusproof/argusproof_deltateam
-  - name: docker volume create portainer_data
-    shell: docker volume create portainer_data
-
-  - name: run uvicorn
-    shell: cd /home/slave/slave_software && nohup uvicorn mainapi:app --host 0.0.0.0 --reload --port 8000
-
+  
+  - name: Unconditionally reboot the machine with all defaults
+    reboot:
 #/***************************************************************
 #*
 #* Copyright (Wouter Weemaes, Safi Bouziane, Kamil Grielens, Robbe Willeme) - All rights reserved. 

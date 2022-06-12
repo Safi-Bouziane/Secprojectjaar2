@@ -103,14 +103,9 @@
   - name: Pull the latest images from private repository on DockerHub
     shell: cd /home/master/master_software/QueueHandler && docker image pull --all-tags argusproof/argusproof_deltateam
   
-  - name: docker volume create portainer_data
-    shell: docker volume create portainer_data
 
-  - name: run uvicorn on the resulthandler api
-    shell: cd /home/master/master_software/ResultHandler/ && nohup uvicorn ResultHandler:app --host 0.0.0.0 --reload --port 9000 &
-
-  - name: run uvicorn on the main api
-    shell: cd /home/master/master_software/api/app/ && nohup uvicorn main:app --host 0.0.0.0 --reload --port 8000 &
+  - name: Unconditionally reboot the machine with all defaults
+    reboot:
 
 
 #/***************************************************************
