@@ -38,8 +38,8 @@ def startcontainers(row,id):
         os.popen(f'sudo docker run -d test8 python3 dmarccheck.py {row[1]} {id}')
 def checkdb():
     mydb = mysql.connector.connect(
-        host="securityprojecthowsami.mysql.database.azure.com",
-        user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+        host="secproject.mysql.database.azure.com",
+        user="argususer",
         password="DeltaGroepPassword#",
         database="securityproject"
 )
