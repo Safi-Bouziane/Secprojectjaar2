@@ -14,6 +14,9 @@ Voeg in de master.py file een extra if toe zodat de queue ook werkt met de toege
 <br>
 
 ![image](https://user-images.githubusercontent.com/78704181/171904799-210cef20-31e7-4adb-b20e-c7727b908295.png)
+ook moet je dit aanpassen! nu hebben we 8 testen dus is het getal 10. 
+![image](https://user-images.githubusercontent.com/78704181/173246722-6c854ef2-39d2-429a-ae10-c567dc6db5c5.png)
+
 
 Als je de test op deze manier toevoegt, is het belangerijk dat je dezelfde structuuur behoudt als de andere testen.
 Steek de test in een methode die een paramter vraagt. Deze methode zal dan het resultaat returnen.
