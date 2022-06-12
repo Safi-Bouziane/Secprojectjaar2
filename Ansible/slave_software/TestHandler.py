@@ -1,10 +1,10 @@
 import os
 import mysql.connector
 
-def StartTests(ip,id,url,test1,test2,test3,test4,test5,test6):
+def StartTests(ip,id,url,test1,test2,test3,test4,test5,test6,test7,test8):
     mydb = mysql.connector.connect(
     host="secproject.mysql.database.azure.com",
-    user="argususer@secproject.mysql.database.azure.com",
+    user="argususer",
     password="DeltaGroepPassword#",
     database="securityproject")
     mycursor = mydb.cursor()
