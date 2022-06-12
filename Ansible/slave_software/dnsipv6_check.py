@@ -25,8 +25,8 @@ rowid = sys.argv[2]
 if 1:
         mydb = mysql.connector.connect(
         host="secproject.mysql.database.azure.com",
-        user="testuser@secproject.mysql.database.azure.com",
-        password="Honden120",
+        user="testuser",
+        password="DeltaGroepPassword#",
         database="securityproject")
         mycursor = mydb.cursor()
         sql = f"UPDATE Result SET TEST6 = %s WHERE ID = %s"
