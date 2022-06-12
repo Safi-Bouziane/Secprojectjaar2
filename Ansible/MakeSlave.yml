@@ -30,6 +30,19 @@
       src: startupslave.service
       dest: /etc/systemd/system/
 
+
+  - name: add the correct rights to the startup file
+    shell: sudo chmod 644 /etc/systemd/system/startupslave.service
+ 
+  - name: add the correct rights to the startup file
+    shell: sudo chmod 744 /usr/local/bin/runslave.sh
+
+  - name: reload deamon
+    shell: sudo systemctl daemon-reload
+
+  - name: enable startup service
+    shell: sudo systemctl enable startupslave.service
+
   - name: ensure docker registry is available
     apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
 
