@@ -62,8 +62,8 @@ while 1:
     while wait == False:    
         with tqdm(total=100, desc='cpu%', position=1) as cpubar, tqdm(total=100, desc='ram%', position=0) as rambar:
             mydb = mysql.connector.connect(
-            host="securityprojecthowsami.mysql.database.azure.com",
-            user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+            host="secproject.mysql.database.azure.com",
+            user="argususer@secproject.mysql.database.azure.com",
             password="DeltaGroepPassword#",
             database="securityproject")
             mycursor = mydb.cursor()

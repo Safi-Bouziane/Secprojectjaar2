@@ -18,8 +18,8 @@ result = https(sys.argv[1])
 rowid = sys.argv[2]
 if 1:
         mydb = mysql.connector.connect(
-        host="securityprojecthowsami.mysql.database.azure.com",
-        user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+        host="secproject.mysql.database.azure.com",
+        user="testuser@secproject.mysql.database.azure.com",
         password="DeltaGroepPassword#",
         database="securityproject")
         mycursor = mydb.cursor()
