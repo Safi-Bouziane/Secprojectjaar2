@@ -30,7 +30,7 @@ rowid = sys.argv[2]
 if 1:
         mydb = mysql.connector.connect(
         host="secproject.mysql.database.azure.com",
-        user="testuser@secproject.mysql.database.azure.com",
+        user="testuser",
         password="DeltaGroepPassword#",
         database="securityproject")
         mycursor = mydb.cursor()
