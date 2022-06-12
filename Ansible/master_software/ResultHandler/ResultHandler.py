@@ -6,7 +6,7 @@ app = FastAPI(openapi_url = "/resulhandleropenapi.json")
 
 mydb = mysql.connector.connect(
 host="secproject.mysql.database.azure.com",
-user="argususer@secproject.mysql.database.azure.com",
+user="argususer",
 password="DeltaGroepPassword#",
 database="securityproject")
 class verify(BaseModel):
