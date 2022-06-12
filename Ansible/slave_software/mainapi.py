@@ -15,6 +15,8 @@ class input(BaseModel):
     test4: bool
     test5: bool
     test6: bool
+    test7: bool
+    test8: bool
 
 app = FastAPI()
 
@@ -24,7 +26,7 @@ async def root():
 
 @app.post("/add/", status_code = 200)
 async def read_user_item(item: input):
-    StartTests(item.ip,item.id,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6)
+    StartTests(item.ip,item.id,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6, item.test7, item.test8)
     return "ok"
 
 
