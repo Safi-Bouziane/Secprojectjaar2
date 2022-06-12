@@ -1,15 +1,23 @@
 - hosts: masteruser
   user: root
   tasks:
+  - name: Log into DockerHub
+    docker_login:
+      username: argusproof
+      password: DeltaTeam
   - name: rebuild test1 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test1 -f dockerfile.http . && docker tag test1:latest argusproof/argusproof_deltateam:test1 && docker push argusproof/argusproof_deltateam:test1
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test1 -f dockerfile.http . && docker tag test1:latest argusproof/argusproof_deltateam:test1 && docker push argusproof/argusproof_deltateam:test1
   - name: rebuild test2 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test2 -f dockerfile.geoip . && docker tag test2:latest argusproof/argusproof_deltateam:test2 && docker push argusproof/argusproof_deltateam:test2
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test2 -f dockerfile.geoip . && docker tag test2:latest argusproof/argusproof_deltateam:test2 && docker push argusproof/argusproof_deltateam:test2
   - name: rebuild test3 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test3 -f dockerfile.bl . && docker tag test3:latest argusproof/argusproof_deltateam:test3 && docker push argusproof/argusproof_deltateam:test3
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test3 -f dockerfile.bl . && docker tag test3:latest argusproof/argusproof_deltateam:test3 && docker push argusproof/argusproof_deltateam:test3
   - name: rebuild test4 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test4 -f dockerfile.ssl . && docker tag test4:latest argusproof/argusproof_deltateam:test4 && docker push argusproof/argusproof_deltateam:test4
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test4 -f dockerfile.ssl . && docker tag test4:latest argusproof/argusproof_deltateam:test4 && docker push argusproof/argusproof_deltateam:test4
   - name: rebuild test5 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test5 -f dockerfile.dnssec . && docker tag test5:latest argusproof/argusproof_deltateam:test5 && docker push argusproof/argusproof_deltateam:test5
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test5 -f dockerfile.dnssec . && docker tag test5:latest argusproof/argusproof_deltateam:test5 && docker push argusproof/argusproof_deltateam:test5
   - name: rebuild test6 with latest github changes
-    shell: cd /home/{{ansible_user}}/master_software/QueueHandler/ && docker build -t test6 -f dockerfile.ipv6 . && docker tag test6:latest argusproof/argusproof_deltateam:test6 && docker push argusproof/argusproof_deltateam:test6
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test6 -f dockerfile.ipv6 . && docker tag test6:latest argusproof/argusproof_deltateam:test6 && docker push argusproof/argusproof_deltateam:test6
+  - name: rebuild test7 with latest github changes
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test7 -f dockerfile.dmarc . && docker tag test7:latest argusproof/argusproof_deltateam:test7 && docker push argusproof/argusproof_deltateam:test7
+  - name: rebuild test8 with latest github changes
+    shell: cd /home/master/master_software/QueueHandler/ && docker build -t test8 -f dockerfile.spf . && docker tag test8:latest argusproof/argusproof_deltateam:test8 && docker push argusproof/argusproof_deltateam:test8

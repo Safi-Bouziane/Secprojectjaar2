@@ -24,6 +24,10 @@ def StartTests(ip,id,url,test1,test2,test3,test4,test5,test6,test7,test8):
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test5 python3 dnssec_check.py {url} {id}')
     if  test6:
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test6 python3 dnsipv6_check.py {url} {id}')
+    if  test7:
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test7 python3 dmarc.py {url} {id}')
+    if  test8:
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test8 python3 spf.py {url} {id}')
 
 
 
