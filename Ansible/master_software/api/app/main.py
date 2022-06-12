@@ -9,7 +9,7 @@ users = []
 
 import mysql.connector
 
-def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
+def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8):
     mydb = mysql.connector.connect(
     host="securityprojecthowsami.mysql.database.azure.com",
     user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
@@ -17,8 +17,8 @@ def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6):
     database="securityproject"
     )
     mycursor = mydb.cursor()
-    sql = "INSERT INTO `queue`(IP,URL,TEST1,TEST2,TEST3,TEST4,TEST5,TEST6) values(%s,%s,%s,%s,%s,%s,%s,%s);"
-    val = (IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6)
+    sql = "INSERT INTO `queue`(IP,URL,TEST1,TEST2,TEST3,TEST4,TEST5,TEST6, TEST7, TEST8) values(%s,%s,%s,%s,%s,%s,%s,%s);"
+    val = (IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8)
     mycursor.execute(sql, val)
     mydb.commit()
 def check_user(data: UserLoginSchema):
@@ -35,10 +35,12 @@ class Resultaat(BaseModel):
     test4: bool
     test5: bool
     test6: bool
+    test7: bool
+    test8: bool
 app = FastAPI()
 @app.post("/add/", dependencies=[Depends(JWTBearer())])
 async def read_user_item(item: Resultaat):
-    InsertIntoQueue(item.ip,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6)
+    InsertIntoQueue(item.ip,item.url,item.test1,item.test2,item.test3,item.test4,item.test5,item.test6, item.test7, item.test8)
     return "ok"
 @app.post("/user/signup", tags=["user"])
 async def create_user(user: UserSchema = Body(...)):

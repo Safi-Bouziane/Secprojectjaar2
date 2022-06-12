@@ -32,6 +32,10 @@ def startcontainers(row,id):
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test5 python3 dnssec_check.py {row[1]} {id}')
     if  row[7]:
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test6 python3 dnsipv6_check.py {row[1]} {id}')
+    if  row[8]:
+        os.popen(f'sudo docker run -d test7 python3 spfcheck.py {row[1]} {id}')
+    if  row[9]:
+        os.popen(f'sudo docker run -d test8 python3 dmarccheck.py {row[1]} {id}')
 def checkdb():
     mydb = mysql.connector.connect(
         host="securityprojecthowsami.mysql.database.azure.com",
@@ -98,14 +102,14 @@ while 1:
                       mydb.commit()
                       print("sent to slave1")
                       print(item)
-                      test = requests.post('http://'+ipslave1+':8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
+                      test = requests.post('http://'+ipslave1+':8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7], "test8": item[8], "test8": item[9]})
                     elif cpu2 < cpu1:
                       sql = f"DELETE FROM queue Where id = {dbbs[8]};"
                       mycursor.execute(sql)
                       mydb.commit()
                       print(item)
                       print("sent to slave2")
-                      test = requests.post('http://'+ipslave2+':8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7]})
+                      test = requests.post('http://'+ipslave2+':8000/add/', json={"ip": item[0],"url": item[1],"id": id,"test1": item[2],"test2": item[3],"test3": item[4],"test4": item[5],"test5": item[6],"test6": item[7], "test7": item[8], "test8": item[9]})
                     else:
                       print("servers are busy")
                       print(str(cpu1) + "   " + str(cpu2))
