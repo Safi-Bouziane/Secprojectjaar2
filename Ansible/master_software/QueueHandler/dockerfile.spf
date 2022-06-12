@@ -1,0 +1,4 @@
+FROM python:latest
+RUN pip3 install dnspython
+run pip3 install mysql-connector-python
+COPY spfcheck.py ./
