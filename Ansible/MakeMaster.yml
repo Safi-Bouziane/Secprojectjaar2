@@ -1,17 +1,20 @@
 - hosts: mac
   user: root
   tasks:
+ 
   - name: Updata and upgrade
     apt:
       upgrade: yes
       update_cache: yes
       cache_valid_time: 86400
+  
   - name: add master user
     user:
       name: master
       password: master
       groups: sudo
       state: present
+  
   - name: ensure repository key is installed
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
@@ -21,10 +24,12 @@
     synchronize:
       src: master_software/
       dest: /home/master/master_software/
+  
   - name: copy startup code to the master host
     synchronize:
       src: run.sh
       dest: /usr/local/bin/
+  
   - name: copy startup service to the master host
     synchronize:
       src: startup.service
@@ -97,6 +102,7 @@
       
   - name: Pull the latest images from private repository on DockerHub
     shell: cd /home/master/master_software/QueueHandler && docker image pull --all-tags argusproof/argusproof_deltateam
+  
   - name: docker volume create portainer_data
     shell: docker volume create portainer_data
 
