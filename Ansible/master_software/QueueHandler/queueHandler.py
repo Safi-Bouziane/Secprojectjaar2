@@ -7,6 +7,8 @@ from blacklistcheck import *
 from sslcheck import *
 from dnssec_check import *
 from dnsipv6_check import *
+from spfcheck import *
+from dmarccheck import *
 
 #client = docker.client.from_env()
 
@@ -66,6 +68,23 @@ def Queue(item):
         except:
            x = "ipv6check failed"
         result =result + x
+  if item[8] and item [1] is not None:
+        print('[spfcheck failed]')
+        print('---------------------------')
+        try:
+          x = str(spf(item[1]))
+        except:
+           x = "spf check failed"
+        result =result + x
+  if item[9] and item [1] is not None:
+        print('[dmarc check failed]')
+        print('---------------------------')
+        try:
+          x = str(dmarc(item[1]))
+        except:
+           x = "dmarc check failed"
+        result =result + x
+
   if 1:
         mydb = mysql.connector.connect(
         host="securityprojecthowsami.mysql.database.azure.com",
