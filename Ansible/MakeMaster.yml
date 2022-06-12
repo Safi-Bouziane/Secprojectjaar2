@@ -1,4 +1,4 @@
-- hosts: mac
+- hosts: masteruser
   user: root
   tasks:
  
