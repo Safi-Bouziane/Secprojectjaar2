@@ -27,14 +27,13 @@ result = dmarc(sys.argv[1])
 rowid = sys.argv[2]
 # print(result)
 
-if 1:
-        mydb = mysql.connector.connect(
-        host="secproject.mysql.database.azure.com",
-        user="testuser",
-        password="DeltaGroepPassword#",
-        database="securityproject")
-        mycursor = mydb.cursor()
-        sql = f"UPDATE Result SET TEST8 = %s WHERE ID = %s"
-        val = (result,rowid)
-        mycursor.execute(sql, val)
-        mydb.commit()
+mydb = mysql.connector.connect(
+host="secproject.mysql.database.azure.com",
+user="testuser",
+password="DeltaGroepPassword#",
+database="securityproject")
+mycursor = mydb.cursor()
+sql = f"UPDATE Result SET TEST8 = %s WHERE ID = %s"
+val = (result,rowid)
+mycursor.execute(sql, val)
+mydb.commit()
