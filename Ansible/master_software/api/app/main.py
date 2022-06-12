@@ -11,8 +11,8 @@ import mysql.connector
 
 def InsertIntoQueue(IP, RESULT, TEST1, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8):
     mydb = mysql.connector.connect(
-    host="securityprojecthowsami.mysql.database.azure.com",
-    user="safidesafi@securityprojecthowsami.mysql.database.azure.com",
+    host="secproject.mysql.database.azure.com",
+    user="argususer",
     password="DeltaGroepPassword#",
     database="securityproject"
     )
