@@ -35,7 +35,7 @@ def startcontainers(row,id):
     if  row[8]:
         os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test7 python3 dmarccheck.py {row[1]} {id}')
     if  row[9]:
-        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test8 python3 spf.py {row[1]} {id}')
+        os.popen(f'sudo docker run -d argusproof/argusproof_deltateam:test8 python3 spfcheck.py {row[1]} {id}')
 def checkdb():
     mydb = mysql.connector.connect(
         host="secproject.mysql.database.azure.com",

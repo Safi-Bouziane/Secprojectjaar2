@@ -33,7 +33,7 @@ user="testuser",
 password="DeltaGroepPassword#",
 database="securityproject")
 mycursor = mydb.cursor()
-sql = f"UPDATE Result SET TEST8 = %s WHERE ID = %s"
+sql = f"UPDATE Result SET TEST7 = %s WHERE ID = %s"
 val = (result,rowid)
 mycursor.execute(sql, val)
 mydb.commit()
