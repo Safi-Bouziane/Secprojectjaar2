@@ -22,6 +22,9 @@ def spf(url):
     except dns.resolver.NXDOMAIN:
         return "Domain not found"
 
+    except dns.resolver.NoAnswer:
+        return "no result"
+
 result = spf(sys.argv[1])
 rowid = sys.argv[2]
 # print(result)
