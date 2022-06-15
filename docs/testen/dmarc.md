@@ -1,4 +1,4 @@
-# SPF record check
+# Dmarc check
 
 ## Bedoeling van de check
 In deze test wordt er nagekeken of het domein beschikt over DMARC-records
