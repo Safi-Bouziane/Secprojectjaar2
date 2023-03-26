@@ -43,11 +43,6 @@ uvicorn ResultHandler:app --host 0.0.0.0 --port 9000
 ```
 docker login
 ```
-### Inlog gegevens:
-```
-username: argusproof
-password: DeltaTeam
-```
 ### Om alle images tegelijk te pullen:
 ```
 docker image pull --all-tags argusproof/argusproof_deltateam
